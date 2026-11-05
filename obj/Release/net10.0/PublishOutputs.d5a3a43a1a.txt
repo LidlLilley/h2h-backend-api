@@ -1,0 +1,9 @@
+/Users/danlilley/Desktop/h2h-backend-api/publish/h2h-backend-api
+/Users/danlilley/Desktop/h2h-backend-api/publish/appsettings.Development.json
+/Users/danlilley/Desktop/h2h-backend-api/publish/appsettings.json
+/Users/danlilley/Desktop/h2h-backend-api/publish/h2h-backend-api.dll
+/Users/danlilley/Desktop/h2h-backend-api/publish/h2h-backend-api.deps.json
+/Users/danlilley/Desktop/h2h-backend-api/publish/h2h-backend-api.runtimeconfig.json
+/Users/danlilley/Desktop/h2h-backend-api/publish/h2h-backend-api.pdb
+/Users/danlilley/Desktop/h2h-backend-api/publish/Microsoft.AspNetCore.OpenApi.dll
+/Users/danlilley/Desktop/h2h-backend-api/publish/Microsoft.OpenApi.dll
