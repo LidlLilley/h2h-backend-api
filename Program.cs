@@ -1,26 +1,37 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
 builder.Services.AddControllers();
-builder.Services.AddHttpClient("FootballData", client =>
-{
-    client.BaseAddress = new Uri("https://api.football-data.org/v4/");
-    var apiKey = builder.Configuration["FootballData:ApiKey"];
-    client.DefaultRequestHeaders.Add("X-Auth-Token", apiKey);
-});
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 
-// Configure CORS for Angular (localhost:4200)
+// Explicit CORS policy permitting Vercel & localhost origins
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular",
-        policy => policy.WithOrigins("http://localhost:4200")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.SetIsOriginAllowed(origin => true)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
 });
 
 var app = builder.Build();
 
-app.UseCors("AllowAngular");
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseRouting();
+
+// MUST be between UseRouting and UseEndpoints/UseAuthorization
+app.UseCors("AllowAll");
+
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
