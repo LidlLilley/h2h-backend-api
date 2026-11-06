@@ -1,11 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Add framework services
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
-// Define named CORS policy
+// Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -18,15 +17,9 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseRouting();
 
-// Must sit strictly between UseRouting and UseAuthorization
+// CORS middleware between Routing and Authorization
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
