@@ -9,6 +9,7 @@ namespace H2HBackendApi.Controllers
     public class MatchupController : ControllerBase
     {
         [HttpGet("teams")]
+        [HttpHead("teams")]
         public IActionResult GetTeams()
         {
             var teams = new[]
