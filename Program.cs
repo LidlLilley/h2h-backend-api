@@ -5,15 +5,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
-// Explicit CORS policy permitting Vercel & localhost origins
+// Explicit permissive CORS setup for public API endpoints
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.SetIsOriginAllowed(origin => true)
+        policy.SetIsOriginAllowed(_ => true)
               .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+              .AllowAnyMethod();
     });
 });
 
@@ -27,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-// MUST be between UseRouting and UseEndpoints/UseAuthorization
+// CORS must sit strictly between UseRouting and UseAuthorization
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
