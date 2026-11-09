@@ -21,15 +21,11 @@ public class MatchupController : ControllerBase
         try
         {
             var client = _httpClientFactory.CreateClient("FootballData");
+            var apiKey = _configuration["FootballData:ApiKey"] ?? Environment.GetEnvironmentVariable("FootballData__ApiKey");
             
-            // Fallback check for header if client factory didn't pick it up
-            if (!client.DefaultRequestHeaders.Contains("X-Auth-Token"))
+            if (!string.IsNullOrEmpty(apiKey) && !client.DefaultRequestHeaders.Contains("X-Auth-Token"))
             {
-                var apiKey = _configuration["FootballData:ApiKey"] ?? Environment.GetEnvironmentVariable("FootballData__ApiKey");
-                if (!string.IsNullOrEmpty(apiKey))
-                {
-                    client.DefaultRequestHeaders.Add("X-Auth-Token", apiKey);
-                }
+                client.DefaultRequestHeaders.Add("X-Auth-Token", apiKey);
             }
 
             var response = await client.GetAsync("competitions/PL/standings");
