@@ -16,17 +16,24 @@ public class MatchupController : ControllerBase
     [HttpGet("teams")]
     public async Task<IActionResult> GetTeams()
     {
-        var client = _httpClientFactory.CreateClient("FootballData");
-        
-        // PL = Premier League (available on free Tier)
-        var response = await client.GetAsync("competitions/PL/standings");
-
-        if (!response.IsSuccessStatusCode)
+        try
         {
-            return StatusCode((int)response.StatusCode, "Failed to fetch data from Football-Data.org");
-        }
+            var client = _httpClientFactory.CreateClient("FootballData");
+            
+            // PL = Premier League (available on free Tier)
+            var response = await client.GetAsync("competitions/PL/standings");
 
-        var jsonString = await response.Content.ReadAsStringAsync();
-        return Content(jsonString, "application/json");
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, new { error = "Failed to fetch data from Football-Data.org" });
+            }
+
+            var jsonString = await response.Content.ReadAsStringAsync();
+            return Content(jsonString, "application/json");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 }
