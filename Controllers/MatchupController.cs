@@ -7,10 +7,12 @@ namespace H2HBackendApi.Controllers;
 public class MatchupController : ControllerBase
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly IConfiguration _configuration;
 
-    public MatchupController(IHttpClientFactory httpClientFactory)
+    public MatchupController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
     {
         _httpClientFactory = httpClientFactory;
+        _configuration = configuration;
     }
 
     [HttpGet("teams")]
@@ -20,16 +22,25 @@ public class MatchupController : ControllerBase
         {
             var client = _httpClientFactory.CreateClient("FootballData");
             
-            // PL = Premier League (available on free Tier)
+            // Fallback check for header if client factory didn't pick it up
+            if (!client.DefaultRequestHeaders.Contains("X-Auth-Token"))
+            {
+                var apiKey = _configuration["FootballData:ApiKey"] ?? Environment.GetEnvironmentVariable("FootballData__ApiKey");
+                if (!string.IsNullOrEmpty(apiKey))
+                {
+                    client.DefaultRequestHeaders.Add("X-Auth-Token", apiKey);
+                }
+            }
+
             var response = await client.GetAsync("competitions/PL/standings");
+            var content = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                return StatusCode((int)response.StatusCode, new { error = "Failed to fetch data from Football-Data.org" });
+                return StatusCode((int)response.StatusCode, new { error = "Football-Data API error", details = content });
             }
 
-            var jsonString = await response.Content.ReadAsStringAsync();
-            return Content(jsonString, "application/json");
+            return Content(content, "application/json");
         }
         catch (Exception ex)
         {
