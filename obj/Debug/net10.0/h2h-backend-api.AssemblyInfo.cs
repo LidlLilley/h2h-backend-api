@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("h2h-backend-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5321d8b05e8a72338b7d35bcebd9c2bfb12aad8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("h2h-backend-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("h2h-backend-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

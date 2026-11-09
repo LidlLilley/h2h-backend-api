@@ -31,3 +31,10 @@
 /Users/danlilley/Desktop/h2h-backend-api/obj/Debug/net10.0/h2h-backend-api.pdb
 /Users/danlilley/Desktop/h2h-backend-api/obj/Debug/net10.0/h2h-backend-api.genruntimeconfig.cache
 /Users/danlilley/Desktop/h2h-backend-api/obj/Debug/net10.0/ref/h2h-backend-api.dll
+/Users/danlilley/Desktop/h2h-backend-api/bin/Debug/net10.0/publish/web.config
+/Users/danlilley/Desktop/h2h-backend-api/bin/Debug/net10.0/publish/appsettings.Development.json
+/Users/danlilley/Desktop/h2h-backend-api/bin/Debug/net10.0/publish/appsettings.json
+/Users/danlilley/Desktop/h2h-backend-api/bin/Debug/net10.0/publish/h2h-backend-api.deps.json
+/Users/danlilley/Desktop/h2h-backend-api/bin/Debug/net10.0/publish/h2h-backend-api.runtimeconfig.json
+/Users/danlilley/Desktop/h2h-backend-api/bin/Debug/net10.0/publish/h2h-backend-api.staticwebassets.endpoints.json
+/Users/danlilley/Desktop/h2h-backend-api/obj/Debug/net10.0/h2h-backend-api.sourcelink.json
